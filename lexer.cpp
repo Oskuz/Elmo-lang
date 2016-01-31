@@ -152,7 +152,7 @@ Token Lexer::nextToken(){
         else{
             ret = Token(Tok::IDENTIFIER_REGULAR, s, Region(file, loc.line, loc.col, loc.col + i));
         }
-        eat((unsigned long)i);
+        eat(i);
         return ret;
     }
     auto ret = Token(Tok::ERROR, string("unexpected token " + context[0]), Region(file,
