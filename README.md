@@ -1,5 +1,5 @@
-# hs-lang
-hs is small (toy) system language.
+# Elmo-language
+Elmo is small (toy) system language.
 Example code:
 ```
 module main import "io", "math" {
