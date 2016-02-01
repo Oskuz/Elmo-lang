@@ -16,29 +16,38 @@ struct Function_call;
 struct Procedure;
 struct Parameter;
 struct Argument;
-struct Import;
 struct Declaring;
 struct Array;
-struct Val_Type;
 struct Operator;
 struct If;
 struct Ret;
 struct Rec;
 struct For;
 struct While;
+// todo delete
 struct LineEnd;
 struct HalfPoint;
-struct Pointer;
+
+
 struct Type;
 struct Impl;
 struct StringLiteral;
 struct CharacterLiteral;
 struct Interger;
 struct Float;
-struct ParseError;
+
 struct Module;
 struct None;
 struct Structure;
+struct Dereference;
+struct Pointer;
+//yet not implemented
+
+struct ParseError;
+struct Val_Type;
+
+
+
 
 enum NodeType {
     NONE,
@@ -50,7 +59,6 @@ enum NodeType {
     PROCEDURE,
     PARAMETER,
     ARGUMENT,
-    IMPORT,
     DECLARING,
     ARRAY,
     VAL_TYPE,
@@ -63,6 +71,7 @@ enum NodeType {
     LINE_END,
     HALF_POINT,
     POINTER,
+    DEREFERENCE,
     TYPE,
     IMPL,
     STRING_LITERAL,
@@ -101,9 +110,9 @@ typedef union NodeData
     Function* function;
     Function_call* function_call;
     Scope* scope;
+    Procedure* pros;
     Parameter* parameter;
     Argument* argument;
-    Import* import;
     Declaring* declaring;
     Array* array;
     Val_Type* val_Type;
@@ -116,6 +125,7 @@ typedef union NodeData
     LineEnd* lineEnd;
     HalfPoint* halfPoint;
     Pointer* pointer;
+    Dereference* dereference;
     Type* type;
     Impl* impl;
     StringLiteral* stringLiteral;
@@ -169,7 +179,6 @@ typedef struct Node
     Node(Scope* scope);
     Node(Parameter* parameter);
     Node(Argument* argument);
-    Node(Import* import);
     Node(Declaring* declaring);
     Node(Array* array);
     Node(Val_Type* val_Type);
@@ -182,6 +191,7 @@ typedef struct Node
     Node(LineEnd* lineEnd);
     Node(HalfPoint* halfPoint);
     Node(Pointer* pointer);
+    Node(Dereference* dereference);
     Node(Type* type);
     Node(Impl* impl);
     Node(StringLiteral* stringLiteral);
@@ -275,7 +285,7 @@ typedef struct Type
 typedef struct Function{
     string name;
     Node* arg; //params
-    Node* body;
+    Node* body; //procedure
 } Function;
 
 typedef struct Module
@@ -306,4 +316,74 @@ typedef struct Parameter{
     template<typename T,U>
     Parameter(string n,T t, U u, unsigned int o);
 }Parameter;
+typedef struct Function_call{
+    string name;
+    vector<Node*> arg; //should be arguments
+}Function_call;
+
+typedef struct Procedure{
+    vector<Node*> statements;
+}Procedure;
+
+typedef struct Argument{
+    Node* value;
+}Argument;
+
+typedef struct Array{
+    Node* type;
+    vector<Node*> values;
+} Array; //[]
+
+typedef struct Operator{
+    string name;
+    Node* lparam;
+    Node* rparam;
+}Operator;
+
+typedef struct If{
+    Node* terms;
+    Node* then; //shall be procedure
+    Node* else_; //shall be procedure
+}If;
+
+typedef struct Ret{
+    std::vector<Node*> args;
+}Ret;
+
+typedef struct Rec{
+    std::vector<Node*> args;
+}Rec;
+
+typedef struct For{
+    Node* arg; //iteratable,what looping
+    Node* body; //function
+}For;
+
+typedef struct While{
+    Node* arg;
+    vector<Node*> body;
+}While;
+
+typedef struct StringLiteral{
+    string value;
+}StringLiteral;
+
+typedef struct CharacterLiteral{
+    char value;
+}CharacterLiteral;
+
+typedef struct Interger{
+    long long value;
+}Interger;
+typedef struct Float{
+    float value;
+}Float;
+
+typedef struct Dereference{
+    Node* value;
+}Dereference;
+
+typedef struct Pointer{
+    Node* type;
+}Pointer;
 #endif
