@@ -44,8 +44,9 @@ All functions are lamdas, they are nameless.
 rec-keyword let function call itself. ``` rec(<statement>) ```
 
 ##Todo-list:
-    - [x] lexer
-    - [] parser
-    - [] ast 
-    - [] type check
-    - [] gode generation, llmv?
+- [x] lexer
+- [ ] write better specification
+- [ ] parser
+- [ ] ast 
+- [ ] type check
+- [ ] gode generation, llmv?
