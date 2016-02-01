@@ -1,3 +1,10 @@
+/**
+* @Author: Oskari Mieskolainen <Oskuz>
+* @Date:   2016-02-01T15:21:41+02:00
+* @Email:  oskuz@outlook.com
+* @Last modified by:   Oskuz
+* @Last modified time: 2016-02-01T15:21:41+02:00
+*/
 #include "lexer.hpp"
 #include <iostream>
 
