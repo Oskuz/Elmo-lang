@@ -2,8 +2,8 @@
 * @Author: Oskari Mieskolainen <Oskuz>
 * @Date:   2016-02-01T15:21:10+02:00
 * @Email:  oskuz@outlook.com
-* @Last modified by:   oskari
-* @Last modified time: 2016-02-15T11:31:16+02:00
+* @Last modified by:   Oskuz
+* @Last modified time: 2016-02-15T11:38:43+02:00
 */
 #ifndef PARSER_HPP
 #define PARSER_HPP "0.0.0"
