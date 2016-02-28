@@ -17,6 +17,19 @@ type vector = {i:i j:i},
     }
 }   
 ```
+```
+module containers {
+   type List = {value:i next:List*} , impl{ 
+             let add = (self x:i){ 
+                       if self.next == nil { 
+                          self.next = new List(x)
+                       } else{ 
+                              self.next.add(x)
+                             }
+                      }
+            }
+}
+```
 ## Specification~
 ```
 $()
