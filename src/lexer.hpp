@@ -2,8 +2,8 @@
 * @Author: Oskari Mieskolainen <Oskuz>
 * @Date:   2016-02-01T15:21:37+02:00
 * @Email:  oskuz@outlook.com
-* @Last modified by:   Oskuz
-* @Last modified time: 2016-02-01T15:21:37+02:00
+* @Last modified by:   oskari
+* @Last modified time: 2016-02-28T19:14:40+02:00
 */
 #ifndef LEXER
 #define LEXER  0
@@ -125,12 +125,24 @@ struct Lexer{
     string file;
     string context;
     Location loc;
+    std::stack<Token> buffer;
 
     Lexer(string file_): file(file_) {
         context = readFile(file);
         loc = Location();
     }
     Token nextToken();
+    Token peekToken(){
+        auto t = nextToken();
+        buffer.push(t);
+        return t;
+    }
+    Token getToken(){
+        if(buffer.size() > 0){
+            auto t = buffer.top(); buffer.pop(); return t;
+        }
+        return nextToken();
+    }
     void eat(unsigned long lenght);
     bool ispecial(string s);
     bool isoperator(string s);

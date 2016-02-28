@@ -2,15 +2,18 @@
 * @Author: Oskari Mieskolainen <Oskuz>
 * @Date:   2016-02-01T15:21:10+02:00
 * @Email:  oskuz@outlook.com
-* @Last modified by:   Oskuz
-* @Last modified time: 2016-02-15T11:38:43+02:00
+* @Last modified by:   oskari
+* @Last modified time: 2016-02-28T14:47:45+02:00
 */
-#ifndef PARSER_HPP
-#define PARSER_HPP "0.0.0"
+#ifndef NODE_HPP
+#define NODE_HPP "0.0.0"
 #include <string>
+#include <sstream>
 #include <unordered_map>
 #include <vector>
+#include <cassert>
 #include "lexer.hpp"
+
 using namespace std;
 
 //nodes
@@ -48,16 +51,16 @@ struct None;
 struct Structure;
 struct Dereference;
 struct Pointer;
-//yet not implemented
-
+struct Scope;
 struct ParseError;
+//yet not implemented
 struct Val_Type;
 
 
 
 
 enum NodeType {
-    NONE,
+    NONE_,
     NODE,
     NODE_META_DATA,
     SYMBOL,
@@ -71,7 +74,7 @@ enum NodeType {
     DECLARING,
     ARRAY,
     VAL_TYPE,
-    OPERATOR,
+    OPERATOR_,
     IF,
     RET,
     REC,
@@ -84,7 +87,7 @@ enum NodeType {
     TYPE,
     IMPL,
     STRING_LITERAL,
-    CHARACTER_LITERAL
+    CHARACTER_LITERAL,
     INTERGER,
     FLOAT,
     BOOLEAN,
@@ -94,13 +97,13 @@ enum NodeType {
 
 void report_error(ParseError e);
 
-enum ErrorType {ERROR, WARNING};
+enum ErrorType {PARSER_ERROR, PARSER_WARNING};
 
 typedef struct ParseError
 {
     string error;
     Region region;
-    ErrorType errorType = ErrorType::ERROR;
+    ErrorType errorType = ErrorType::PARSER_ERROR;
 
     vector<string> notes;
 
@@ -114,6 +117,7 @@ typedef struct ParseError
 typedef union NodeData
 {
     None* none;
+    Node* node;
     NodeMetadata* nodeMetadata;
     Symbol* symbol;
     Function* function;
@@ -216,10 +220,10 @@ typedef struct Node
        auto found = metadata.scope->values.find(key);
        if (found != metadata.scope->values.end())
        {
-           auto error = ParseError{"redeclaration of symbol: " + key, value->metadata.region};
-           std::ostringstream s;
-           s << found->second->metadata.region;
-           error.notes.push_back("previous declaration was here: " + s.str() );
+           auto error = ParseError("redeclaration of symbol: " + key, value->metadata.region);
+           stringstream os;
+           os << found->second->metadata.region;
+           error.notes.push_back("previous declaration was here: " + os.str() );
        }
 
        metadata.scope->values[key] = value;
@@ -305,15 +309,18 @@ typedef struct Module
 
 enum DeclarationType{
     IMMUTABLE, MUTABLE, HARD
-}
-typedef struct Declaring
-{
+};
+typedef struct Declaring{
     string name;
-    Node* type;
+    Node* type; //Val_Type
     Node* initialValue;
-    DeclarationType declarationType
+    DeclarationType declarationType;
 
 }Declaring;
+
+typedef struct Val_Type {
+    string name;
+}Val_Type;
 
 typedef struct Parameter{
     string name;
@@ -322,7 +329,7 @@ typedef struct Parameter{
     unsigned int order;
     Parameter();
 
-    template<typename T,U>
+    template<typename T, typename U>
     Parameter(string n,T t, U u, unsigned int o);
 }Parameter;
 typedef struct Function_call{

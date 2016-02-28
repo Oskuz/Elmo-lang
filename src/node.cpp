@@ -3,133 +3,133 @@
 * @Date:   2016-02-15T10:35:42+02:00
 * @Email:  oskuz@outlook.com
 * @Last modified by:   oskari
-* @Last modified time: 2016-02-15T11:31:06+02:00
+* @Last modified time: 2016-02-28T14:24:54+02:00
 */
 
 
-
+#include <cassert>
 #include "node.hpp"
 
 Node::Node(){
 
 }
 Node::Node(Node* node){
-    type = NODE;
-    data = node;
+    type = NodeType::NODE;
+    data.node = node;
 }
 Node::Node(None* none){
-    type = NONE;
-    data = none;
+    type = NodeType::NONE_;
+    data.none = none;
 }
 Node::Node(NodeMetadata* nodeMetadata){
-    type = NODE_META_DATA;
-    data = nodeMetadata;
+    type = NodeType::NODE_META_DATA;
+    data.nodeMetadata = nodeMetadata;
 }
 Node::Node(Symbol* symbol){
-    type = SYMBOL;
-    data = symbol;
+    type = NodeType::SYMBOL;
+    data.symbol = symbol;
 }
 Node::Node(Function* function){
-    type = FUNCTION;
-    data = function;
+    type = NodeType::FUNCTION;
+    data.function = function;
 }
 Node::Node(Function_call* function_call){
-    type = FUNCTION_CALL;
-    data = function_call;
+    type = NodeType::FUNCTION_CALL;
+    data.function_call = function_call;
 }
 Node::Node(Scope* scope){
-    type = SCOPE;
-    data = scope;
+    type = NodeType::SCOPE;
+    data.scope = scope;
 }
 Node::Node(Parameter* parameter){
-    type = PARAMETER;
-    data = parameter;
+    type = NodeType::PARAMETER;
+    data.parameter = parameter;
 }
 Node::Node(Argument* argument){
-    type = ARGUMENT;
-    data = argument;
+    type = NodeType::ARGUMENT;
+    data.argument = argument;
 }
 Node::Node(Declaring* declaring){
-    type = DECLARING;
-    data = declaring;
+    type = NodeType::DECLARING;
+    data.declaring = declaring;
 }
 Node::Node(Array* array){
-    type = ARRAY;
-    data = array;
+    type = NodeType::ARRAY;
+    data.array = array;
 }
 Node::Node(Val_Type* val_Type){
-    type = VAL_TYPE;
-    data = val_Type;
+    type = NodeType::VAL_TYPE;
+    data.val_Type = val_Type;
 }
 Node::Node(Operator* operator_){
-    type = OPERATOR;
-    data = operator_;
+    type = NodeType::OPERATOR_;
+    data.operator_ = operator_;
 }
 Node::Node(If* if_){
-    type = IF;
-    data = if_;
+    type = NodeType::IF;
+    data.if_ = if_;
 }
 Node::Node(Ret* ret){
-    type = RET;
-    data = ret;
+    type = NodeType::RET;
+    data.ret = ret;
 }
 Node::Node(Rec* rec){
-    type = REC;
-    data = rec;
+    type = NodeType::REC;
+    data.rec = rec;
 }
 Node::Node(For* for_){
-    type = FOR;
-    data = for_;
+    type = NodeType::FOR;
+    data.for_ = for_;
 }
 Node::Node(While* while_){
-    type = WHILE;
-    data = while_;
+    type = NodeType::WHILE;
+    data.while_ = while_;
 }
 Node::Node(LineEnd* lineEnd){
-    type = LINE_END;
-    data = lineEnd;
+    type = NodeType::LINE_END;
+    data.lineEnd = lineEnd;
 }
 Node::Node(HalfPoint* halfPoint){
-    type = HALF_POINT;
-    data = halfPoint;
+    type = NodeType::HALF_POINT;
+    data.halfPoint = halfPoint;
 }
 Node::Node(Pointer* pointer){
-    type = POINTER;
-    data = pointer;
+    type = NodeType::POINTER;
+    data.pointer = pointer;
 }
 Node::Node(Dereference* dereference){
-    type = DEREFERENCE;
-    data = dereference;
+    type = NodeType::DEREFERENCE;
+    data.dereference = dereference;
 }
-Node::Node(Type* type){
-    type = TYPE;
-    data = type;
+Node::Node(Type* type_){
+    type = NodeType::TYPE;
+    data.type = type_;
 }
 Node::Node(Impl* impl){
-    type = IMPL;
-    data = impl;
+    type = NodeType::IMPL;
+    data.impl = impl;
 }
 Node::Node(StringLiteral* stringLiteral){
-    type = STRING_LITERAL;
-    data = stringLiteral;
+    type = NodeType::STRING_LITERAL;
+    data.stringLiteral = stringLiteral;
 }
 Node::Node(CharacterLiteral* characterLiteral){
-    type = CHARACTER_LITERAL;
-    data = characterLiteral;
+    type = NodeType::CHARACTER_LITERAL;
+    data.characterLiteral = characterLiteral;
 }
 Node::Node(Interger* interger){
-    type = INTERGER;
-    data = interger;
+    type = NodeType::INTERGER;
+    data.interger = interger;
 }
 Node::Node(ParseError* parseError){
-    type = PARSE_ERROR;
-    data = parseError;
+    type = NodeType::PARSE_ERROR;
+    data.parseError = parseError;
 }
 Node::Node(Module* module){
-    type = MODULE;
-    data = module;
+    type = NodeType::MODULE;
+    data.module = module;
 }
 Node::Node(Structure* structure){
-    type = STRUCTURE;
-    data = structure;
+    type = NodeType::STRUCTURE;
+    data.structure = structure;
 }
