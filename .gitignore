@@ -30,4 +30,7 @@
 *.exe
 *.out
 *.app
+#boost
+/src/boost/*
+/compiler1/*
 >>>>>>> b3eb56b1fdd88e5ab5e7d7be6007ce7a2c63b1eb

@@ -3,7 +3,7 @@
 * @Date:   2016-02-01T15:21:10+02:00
 * @Email:  oskuz@outlook.com
 * @Last modified by:   oskari
-* @Last modified time: 2016-02-28T14:47:45+02:00
+* @Last modified time: 2016-03-12T21:52:21+02:00
 */
 #ifndef NODE_HPP
 #define NODE_HPP "0.0.0"
@@ -297,7 +297,7 @@ typedef struct Type
 
 typedef struct Function{
     string name;
-    Node* arg; //params
+    Node* argl, argr; //params
     Node* body; //procedure
 } Function;
 
@@ -334,7 +334,7 @@ typedef struct Parameter{
 }Parameter;
 typedef struct Function_call{
     string name;
-    vector<Node*> arg; //should be arguments
+    vector<Node*> argl, argr; //should be arguments
 }Function_call;
 
 typedef struct Procedure{
