@@ -3,7 +3,7 @@
 * @Date:   2016-02-28T19:14:29+02:00
 * @Email:  oskuz@outlook.com
 * @Last modified by:   oskari
-* @Last modified time: 2016-02-28T19:14:29+02:00
+* @Last modified time: 2016Mar25
 */
 
 
@@ -15,7 +15,7 @@
 #include <vector>
 
 using namespace std;
-
+/*
  Node* parser::module(Lexer* lex){
      auto t = lex->nextToken();
      if(t.tok != Tok.IDENTIFIER_KEY && t.value != "module"){
@@ -44,3 +44,4 @@ using namespace std;
      return Node(Module(n))
 
  }
+*/

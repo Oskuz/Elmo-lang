@@ -3,7 +3,7 @@
 * @Date:   2016-02-28T15:44:45+02:00
 * @Email:  oskuz@outlook.com
 * @Last modified by:   oskari
-* @Last modified time: 2016-03-12T22:03:00+02:00
+* @Last modified time: 2016Mar25
 */
 
 
@@ -56,7 +56,7 @@ struct gammar_count : qi::grammar<Iterator>
                         );
             function = (
                         (
-                            tok.special >> *parameter >> tok.special 
+                            tok.special >> *parameter >> tok.special
                             >> tok.special >>  *parameter >> tok.special
                             | tok.special >> *parameter >> tok.special
                         ) >> procedure
