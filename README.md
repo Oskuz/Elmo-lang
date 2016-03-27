@@ -3,9 +3,9 @@
 @Date:   2016Mar26
 @Email:  oskuz@outlook.com
 @Last modified by:   oskari
-@Last modified time: 2016Mar26
+@Last modified time: 2016Mar27
 -->
-
+v.0.0a Current version didn't compile.
 
 
 # Elmo-language
