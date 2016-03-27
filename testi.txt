@@ -1,15 +1,23 @@
+@Author: Oskari Mieskolainen <oskari>
+@Date:   2016Mar26
+@Email:  oskuz@outlook.com
+@Last modified by:   oskari
+@Last modified time: 2016Mar27
+
+
+
 module main {
-    import "io", "math"
-    let main = (){   #fibonacci
-                     [1 ..8] |> (n:i32){
-                                    if n <= 1 { ret 1}
-                                    else {ret rec(n-1) + rec(n-2)}
-                                    } | println;
+    import "io" "math"
+    let main  (){   #fibonacci
+                     | |> [.. 1 8] (n:i32){
+                                    if <= n  1 { ret 1}
+                                    else {ret + rec(- n 1) rec(- n 2)}
+                                    }  println;
                  }
 
 #struct
-type vector = {i:i j:i},
+type vector  {i:i j:i},
     impl{
-        let lenght = (self){ math.sqr math.pow self.i 2 + math.pow self.j 2 }
+        let lenght = (self){ math.sqr + math.pow self.i 2  math.pow self.j 2 }
     }
 }

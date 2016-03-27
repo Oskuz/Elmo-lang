@@ -1,29 +1,39 @@
+<!--
+@Author: Oskari Mieskolainen <oskari>
+@Date:   2016Mar26
+@Email:  oskuz@outlook.com
+@Last modified by:   oskari
+@Last modified time: 2016Mar26
+-->
+
+
+
 # Elmo-language
 Elmo is small (toy) system language.
 Example code:
 ```
 module main import "io", "math" {
     let main = (){   #fibonacci
-                     [1 ..8] |> (n:i32){ 
+                     [1 ..8] |> (n:i32){
                                     if n <= 1 { ret 1}
                                     else {ret rec(n-1) + rec(n-2)}
                                     } | println;
                  }
 
-#struct
+# struct
 type vector = {i:i j:i},
-    impl{ 
+    impl{
         let lenght = (self){ math.sqr math.pow self.i 2 + math.pow self.j 2 }
     }
 }   
 ```
 ```
 module containers {
-   type List = {value:i next:List*} , impl{ 
-             let add = (self x:i){ 
-                       if self.next == nil { 
+   type List = {value:i next:List*} , impl{
+             let add = (self x:i){
+                       if self.next == nil {
                           self.next = new List(x)
-                       } else{ 
+                       } else{
                               self.next.add(x)
                              }
                       }
@@ -42,7 +52,7 @@ you would declare variables a four way:
  * constant ``` let <name>$(:<type>) = <value> ```
  * mutable ``` let <name>$(:<type>) := <value> ```
  * constant, name changet to value in every place where it exist ```let const <name>$(:<type>) = <value> ```
- 
+
 ### Module
 Module is basic namespace.
 ```
@@ -56,10 +66,14 @@ All functions are lamdas, they are nameless.
 ####rec-keyword
 rec-keyword let function call itself. ``` rec(<statement>) ```
 
+###statements
+    ```
+    ([<function>|<declarationg>|<type>|<struct>|<function_call>|<list>|<statement>] | [\(<function>|<declarationg>|<type>|<struct>|<function_call>|<list>|<statement>\)]) \n
+    ```
 ##Todo-list:
 - [x] lexer
 - [ ] write better specification
 - [ ] parser
-- [ ] ast 
+- [ ] ast
 - [ ] type check
 - [ ] gode generation, llmv?

@@ -3,14 +3,14 @@
 * @Date:   2016-02-01T15:21:37+02:00
 * @Email:  oskuz@outlook.com
 * @Last modified by:   oskari
-* @Last modified time: 2016-02-28T19:14:40+02:00
+* @Last modified time: 2016Mar27
 */
 #ifndef LEXER
 #define LEXER  0
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <stack>
+#include <list>
 #include <vector>
 
 #define START_LINE 1
@@ -106,14 +106,14 @@ vector<string> const keywords = {
 };
 struct Token
 {
-    Tok tok;
+    Tok type;
     string value;
     Region region;
 
-    Token() : tok(Tok::NONE), value(""), region(Region()) { }
-    Token(Tok _tok, string _value, Region _region) : tok(_tok), value(_value), region(_region) { }
+    Token() : type(Tok::NONE), value(""), region(Region()) { }
+    Token(Tok _tok, string _value, Region _region) : type(_tok), value(_value), region(_region) { }
     std::ostream &print(std::ostream &os) const {
-         os << "token "<<tok<<" value: "<<value<<" in "<<region;
+         os << "token "<<type<<" value: "<<value<<" in "<<region;
          return os;
     }
 };
@@ -125,7 +125,7 @@ struct Lexer{
     string file;
     string context;
     Location loc;
-    std::stack<Token> buffer;
+    std::list<Token> buffer;
 
     Lexer(string file_): file(file_) {
         context = readFile(file);
@@ -134,15 +134,14 @@ struct Lexer{
     Token nextToken();
     Token peekToken(){
         auto t = nextToken();
-        buffer.push(t);
+        buffer.push_back(t);
         return t;
     }
     Token getToken(){
-        if(buffer.size() > 0){
-            auto t = buffer.top(); buffer.pop(); return t;
-        }
+        if(buffer.size() > 0){auto t = buffer.front(); buffer.pop_front(); return t;}
         return nextToken();
     }
+private:
     void eat(unsigned long lenght);
     bool ispecial(string s);
     bool isoperator(string s);
